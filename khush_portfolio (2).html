@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khush | Portfolio - Digital Marketing & AI</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#0a0a0f',
+                        primary: '#6366f1',
+                        secondary: '#a855f7',
+                        accent: '#06b6d4',
+                    },
+                    animation: {
+                        'gradient-x': 'gradient-x 15s ease infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'gradient-x': {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0f;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0f;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4f46e5;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6366f1;
+        }
+
+        /* Glassmorphism utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-card {
+            background: linear-gradient(145deg, rgba(30, 30, 40, 0.7), rgba(20, 20, 30, 0.7));
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(168, 85, 247, 0.4);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        /* Glowing text effect */
+        .glow-text {
+            text-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+        }
+
+        /* Scroll Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Skill Chip */
+        .skill-chip {
+            transition: all 0.2s ease;
+        }
+        .skill-chip:hover {
+            transform: scale(1.05);
+            background: rgba(99, 102, 241, 0.2);
+            border-color: rgba(168, 85, 247, 0.5);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Blob Backgrounds */
+        .blob {
+            position: absolute;
+            filter: blur(80px);
+            z-index: -1;
+            opacity: 0.4;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary selection:text-white relative">
+
+    <!-- Background Decorative Blobs -->
+    <div class="blob bg-primary w-96 h-96 rounded-full top-0 left-0 -translate-x-1/2 -translate-y-1/2 mix-blend-screen"></div>
+    <div class="blob bg-secondary w-96 h-96 rounded-full bottom-0 right-0 translate-x-1/3 translate-y-1/3 mix-blend-screen"></div>
+    <div class="blob bg-accent w-80 h-80 rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mix-blend-screen opacity-20"></div>
+
+    <header class="fixed top-0 w-full z-50 glass border-b-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="#" class="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent glow-text">
+                        Khush.
+                    </a>
+                </div>
+                <div class="hidden md:block">
+                    <nav class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">About</a>
+                        <a href="#skills" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Skills</a>
+                        <a href="#experience" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Experience</a>
+                        <a href="#projects" class="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors">Projects</a>
+                        <a href="#contact" class="bg-primary/20 text-primary border border-primary/50 hover:bg-primary hover:text-white px-4 py-2 rounded-full text-sm font-medium transition-all shadow-[0_0_15px_rgba(99,102,241,0.3)]">Let's Connect</a>
+                    </nav>
+                </div>
+                <!-- Mobile menu button (Simplified for this scope) -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-gray-300 hover:text-white p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="hero" class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 min-h-screen flex items-center justify-center overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+                <div class="inline-block mb-4 px-4 py-1.5 rounded-full glass text-sm font-medium text-accent border-accent/30 reveal">
+                    🚀 Next-Gen Marketer & AI Enthusiast
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 reveal" style="transition-delay: 100ms;">
+                    Hi, I'm <span class="bg-clip-text text-transparent bg-gradient-to-r from-secondary via-primary to-accent animate-gradient-x glow-text">Khush</span>
+                </h1>
+                <p class="mt-4 max-w-2xl text-lg md:text-xl text-gray-400 mx-auto mb-10 reveal" style="transition-delay: 200ms;">
+                    BBA Student in Digital Marketing & Artificial Intelligence at Lovely Professional University. Bridging the gap between consumer psychology and AI-driven strategies.
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-4 reveal" style="transition-delay: 300ms;">
+                    <a href="Khush_MainResume.pdf" target="_blank" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-primary to-secondary text-white font-semibold shadow-[0_0_20px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)] transform hover:-translate-y-1 transition-all duration-300">
+                        <i class="fas fa-file-pdf mr-2"></i> View My Resume
+                    </a>
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-3.5 rounded-full glass border border-gray-600 text-white font-semibold hover:bg-white/5 transform hover:-translate-y-1 transition-all duration-300">
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Floating element decoration -->
+            <div class="absolute right-1/4 top-1/3 animate-float opacity-30 pointer-events-none hidden lg:block">
+                <i class="fas fa-robot text-6xl text-accent"></i>
+            </div>
+            <div class="absolute left-1/4 bottom-1/3 animate-float opacity-30 pointer-events-none hidden lg:block" style="animation-delay: -3s;">
+                <i class="fas fa-bullseye text-6xl text-secondary"></i>
+            </div>
+        </section>
+
+        <section id="about" class="py-20 bg-dark/50 relative border-t border-white/5">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">About Me</h2>
+                    <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="reveal glass-card p-8 rounded-2xl relative overflow-hidden group">
+                        <!-- Decorative glow inside card -->
+                        <div class="absolute -top-10 -right-10 w-32 h-32 bg-primary/20 rounded-full blur-2xl group-hover:bg-primary/30 transition-all duration-500"></div>
+                        
+                        <h3 class="text-2xl font-semibold mb-4 text-white flex items-center">
+                            <i class="fas fa-user-astronaut mr-3 text-secondary"></i> My Journey
+                        </h3>
+                        <p class="text-gray-300 leading-relaxed mb-6">
+                            I am a motivated BBA student with hands-on retail marketing experience and academic project work spanning consumer research, design thinking, AI prompt engineering, and brand strategy.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            I am highly skilled at translating consumer insight into actionable marketing plans and creating AI-assisted content strategies. My goal is to leverage emerging technologies to craft compelling brand narratives and data-driven marketing campaigns.
+                        </p>
+                    </div>
+
+                    <div class="reveal space-y-6" style="transition-delay: 200ms;">
+                        <div class="glass-card p-6 rounded-2xl border-l-4 border-l-accent">
+                            <div class="flex items-start">
+                                <div class="bg-accent/20 p-3 rounded-lg mr-4">
+                                    <i class="fas fa-graduation-cap text-accent text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xl font-semibold text-white">Education</h4>
+                                    <p class="text-primary font-medium mt-1">Lovely Professional University</p>
+                                    <p class="text-gray-400 mt-2 text-sm">Bachelor of Business Administration (BBA) - Digital Marketing & Artificial Intelligence</p>
+                                    <p class="text-gray-500 text-sm mt-1">2026 - 2029 (Expected)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">Core Competencies</h2>
+                    <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Marketing Skills -->
+                    <div class="reveal glass-card p-6 rounded-2xl">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-chart-line text-2xl text-accent mr-3"></i>
+                            <h3 class="text-xl font-semibold text-white">Marketing</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">Digital Marketing</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">Consumer Research</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">Market Research</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">Design Thinking</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">Marketing Mix (4Ps)</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">SEO Basics</span>
+                        </div>
+                    </div>
+
+                    <!-- AI & Tools -->
+                    <div class="reveal glass-card p-6 rounded-2xl" style="transition-delay: 150ms;">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-microchip text-2xl text-secondary mr-3"></i>
+                            <h3 class="text-xl font-semibold text-white">AI & Tools</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-chip px-4 py-2 rounded-full border border-secondary/30 bg-secondary/10 text-sm text-gray-300">AI Prompt Engineering</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-secondary/30 bg-secondary/10 text-sm text-gray-300">ChatGPT</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-secondary/30 bg-secondary/10 text-sm text-gray-300">Canva</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">MS Office</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">Basic Git/GitHub</span>
+                        </div>
+                    </div>
+
+                    <!-- Soft Skills -->
+                    <div class="reveal glass-card p-6 rounded-2xl" style="transition-delay: 300ms;">
+                        <div class="flex items-center mb-6">
+                            <i class="fas fa-users text-2xl text-primary mr-3"></i>
+                            <h3 class="text-xl font-semibold text-white">Soft Skills</h3>
+                        </div>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="skill-chip px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-sm text-gray-300">Communication</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-primary/30 bg-primary/10 text-sm text-gray-300">Customer Handling</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">Teamwork</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">Creativity</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">Problem Solving</span>
+                            <span class="skill-chip px-4 py-2 rounded-full border border-gray-700 bg-gray-800/50 text-sm text-gray-300">Time Management</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20 bg-dark/50 relative border-y border-white/5">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">Professional Experience</h2>
+                    <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
+                </div>
+
+                <div class="reveal glass-card p-8 rounded-2xl relative">
+                    <div class="absolute top-8 right-8 text-4xl text-white/5">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row md:items-center justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Marketing Intern</h3>
+                            <h4 class="text-lg text-primary font-medium">Bareja Crockery House, Panipat</h4>
+                        </div>
+                        <div class="mt-4 md:mt-0 px-4 py-1.5 rounded-full bg-white/10 text-sm text-gray-300 inline-block w-max border border-white/10">
+                            <i class="far fa-calendar-alt mr-2"></i> June 1, 2026 - July 31, 2026
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4 mb-8 text-gray-300">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-accent mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Conducted market analysis to track competitor pricing and identify shifting consumer preferences in home goods.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-accent mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Assisted on the retail floor during peak hours, gathering direct consumer feedback to help refine our marketing approach.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-accent mt-1 mr-3 flex-shrink-0"></i>
+                            <span>Supported local marketing efforts, in-store display arrangements, customer engagement, and word-of-mouth promotion.</span>
+                        </li>
+                    </ul>
+
+                    <a href="experience_letter.pdf" target="_blank" class="inline-flex items-center px-6 py-2.5 rounded-full border border-secondary text-secondary hover:bg-secondary hover:text-white transition-all duration-300 font-medium">
+                        <i class="fas fa-certificate mr-2"></i> View Experience Letter
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-3xl md:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">Academic Projects</h2>
+                    <div class="h-1 w-20 bg-gradient-to-r from-primary to-secondary mx-auto mt-4 rounded-full"></div>
+                    <p class="mt-4 text-gray-400">Showcasing my work in marketing strategy, UX, and AI implementation.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Project 1 -->
+                    <div class="reveal glass-card rounded-2xl overflow-hidden group flex flex-col">
+                        <div class="h-2 bg-gradient-to-r from-blue-500 to-accent"></div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-2xl font-bold text-white group-hover:text-accent transition-colors">CampusBite</h3>
+                                <i class="fas fa-utensils text-2xl text-white/20 group-hover:text-accent/50 transition-colors"></i>
+                            </div>
+                            <h4 class="text-sm font-medium text-gray-400 mb-4 uppercase tracking-wider">Campus Food Delivery Platform</h4>
+                            <p class="text-gray-300 mb-6 flex-grow">
+                                UX & Consumer Research course project. Identified genuine consumer needs among hostel students, built a customer persona, and applied the 5-stage Design Thinking process. Developed a comprehensive Marketing Mix (4Ps) strategy and created structured UX improvements.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-xs px-3 py-1 rounded bg-white/5 border border-white/10 text-gray-300">UX Research</span>
+                                <span class="text-xs px-3 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Design Thinking</span>
+                                <span class="text-xs px-3 py-1 rounded bg-white/5 border border-white/10 text-gray-300">4Ps Strategy</span>
+                            </div>
+                            <a href="https://github.com/khushbareja/CampusBite-Marketing-UX" target="_blank" class="inline-flex justify-center items-center w-full px-6 py-3 rounded-lg bg-white/10 hover:bg-accent/20 border border-white/10 hover:border-accent/50 text-white transition-all duration-300 mt-auto">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="reveal glass-card rounded-2xl overflow-hidden group flex flex-col" style="transition-delay: 150ms;">
+                        <div class="h-2 bg-gradient-to-r from-secondary to-primary"></div>
+                        <div class="p-8 flex-grow flex flex-col">
+                            <div class="flex justify-between items-start mb-4">
+                                <h3 class="text-2xl font-bold text-white group-hover:text-secondary transition-colors">ECOSTRIDE</h3>
+                                <i class="fas fa-shoe-prints text-2xl text-white/20 group-hover:text-secondary/50 transition-colors"></i>
+                            </div>
+                            <h4 class="text-sm font-medium text-gray-400 mb-4 uppercase tracking-wider">AI-Powered Sustainable Footwear</h4>
+                            <p class="text-gray-300 mb-6 flex-grow">
+                                Prompt Engineering for Generative AI course project. Built a brand strategy targeting Indian Gen Z covering mission and core values. Engineered structured AI prompts for social content across ChatGPT and Midjourney, designing a 14-day SEO-targeted content calendar.
+                            </p>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="text-xs px-3 py-1 rounded bg-white/5 border border-white/10 text-gray-300">AI Prompting</span>
+                                <span class="text-xs px-3 py-1 rounded bg-white/5 border border-white/10 text-gray-300">Brand Strategy</span>
+                                <span class="text-xs px-3 py-1 rounded bg-white/5 border border-white/10 text-gray-300">SEO Content</span>
+                            </div>
+                            <a href="https://github.com/khushbareja/ECOSTRIDE-Brand-Pitch" target="_blank" class="inline-flex justify-center items-center w-full px-6 py-3 rounded-lg bg-white/10 hover:bg-secondary/20 border border-white/10 hover:border-secondary/50 text-white transition-all duration-300 mt-auto">
+                                <i class="fab fa-github mr-2"></i> View on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 relative bg-black/60 border-t border-white/10">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-white glow-text">Let's Connect</h2>
+                    <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+                        Whether you have a question, a project opportunity, or just want to say hi, I'll try my best to get back to you!
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-12">
+                        <a href="mailto:khushbareja123@gmail.com" class="flex items-center gap-3 px-6 py-3 rounded-full glass border border-primary/30 hover:border-primary text-white hover:bg-primary/10 transition-all group w-full sm:w-auto justify-center">
+                            <i class="fas fa-envelope text-primary group-hover:scale-110 transition-transform"></i>
+                            khushbareja123@gmail.com
+                        </a>
+                    </div>
+
+                    <div class="flex justify-center gap-8 mb-12 border-b border-white/10 pb-12">
+                        <a href="https://www.linkedin.com/in/khushbareja" target="_blank" class="w-14 h-14 rounded-full glass flex items-center justify-center text-2xl text-gray-400 hover:text-[#0077b5] hover:border-[#0077b5] hover:bg-[#0077b5]/10 transition-all transform hover:-translate-y-2">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/khushbareja" target="_blank" class="w-14 h-14 rounded-full glass flex items-center justify-center text-2xl text-gray-400 hover:text-white hover:border-white hover:bg-white/10 transition-all transform hover:-translate-y-2">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+
+                    <p class="text-sm text-gray-500">
+                        &copy; 2026 Khush Bareja. Designed & Built with passion.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Intersection Observer for scroll animations (fade in / slide up)
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: stop observing once animated to keep it visible
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
